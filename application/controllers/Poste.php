@@ -14,4 +14,11 @@ class Poste extends CI_Controller {
 	{
 		$this->load->view('admin');
 	}
+
+	public function list_poste()
+	{
+		$postes = $this->poste->get_all();
+		return $postes;
+		
+	}
 }

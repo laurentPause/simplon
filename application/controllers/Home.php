@@ -7,7 +7,8 @@ class Home extends CI_Controller {
     {
 		parent::__construct();
 
-		$this->load->helper('form');
+        $this->load->model('poste_model', 'poste');
+
     }
 
 	public function index()
@@ -15,18 +16,20 @@ class Home extends CI_Controller {
 		$is_login = $this->verif_login();
 
 		if($is_login){
-			$this->load->view('admin');
+			$data = array(
+				'title' => 'Postes',
+				'postes' => $this->poste->get_all()
+			);
+			$this->load->view('admin',$data);
 		}else{
 			$this->load->view('login');
 		}
 		
 	}
 
-	private function  verif_login(){
-		return false;
+	private function  verif_login()
+	{
+		return true;
 	}
 
-	public function login(){
-		echo 'pika';
-	}
 }
