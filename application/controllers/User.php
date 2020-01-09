@@ -7,10 +7,26 @@ class User extends CI_Controller {
     {
 		parent::__construct();
 		
-        $this->load->model('user_model', 'user');
+		$this->load->model('user_model', 'user');
+		
+		$this->load->helper('url');
+
+		$this->load->helper('path');
+
+
     }
 	public function index()
 	{
 		$this->load->view('admin');
+	}
+
+	public function add()
+	{
+		$data = array(
+			'title' => 'Ajouter un utilisateur',
+			'content'=> 'test'
+		);
+		
+		$this->load->view('admin',$data);
 	}
 }
