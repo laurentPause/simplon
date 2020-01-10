@@ -41,6 +41,15 @@ class Admin extends CI_Controller {
 
 	}
 
+	public function postes()
+	{
+		$data = array(
+			'title' => 'Postes'
+		);
+		$this->load_views('admin/poste',$data);
+
+	}
+
 	private function load_views($view,$data)
 	{
 		$this->load->view('admin/header',$data);
@@ -53,10 +62,7 @@ class Admin extends CI_Controller {
 	{
 		$users = $this->user->get_all();
 		$data['data'] = $users;
-		$this->output
-                        ->set_status_header(200)
-                        ->set_content_type('application/json', 'utf-8')
-                        ->set_output(json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+		$this->api_json($data);
 	}
 
 	public function add_user()
@@ -69,6 +75,17 @@ class Admin extends CI_Controller {
 		
 		$this->user->add($data);
 
+	}
+
+	public function list_poste()
+	{
+		$postes = $this->poste->get_all();
+		$data['data'] = $postes;
+		$this->api_json($data);
+	}
+
+	private function api_json($data)
+	{
 		$this->output
                         ->set_status_header(200)
                         ->set_content_type('application/json', 'utf-8')

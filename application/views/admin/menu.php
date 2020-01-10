@@ -29,7 +29,7 @@
       <span>Utilisateurs</span></a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="/admin/users">
+    <a class="nav-link" href="/admin/postes">
       <i class="fas fa-desktop"></i>
       <span>Postes</span></a>
   </li>
