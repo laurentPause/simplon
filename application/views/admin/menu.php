@@ -16,61 +16,27 @@
   <hr class="sidebar-divider my-0">
 
   <!-- Nav Item - Dashboard -->
-  <li class="nav-item active">
+  <li class="nav-item ">
     <a class="nav-link" href="index.html">
       <i class="fas fa-fw fa-tachometer-alt"></i>
       <span>Dashboard</span></a>
   </li>
-
   <!-- Divider -->
   <hr class="sidebar-divider">
-
- 
-
-  <!-- Nav Item - Pages Collapse Menu -->
   <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-user"></i>
-          <span>Utilisateurs</span>
-    </a>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-      <div class="bg-white py-2 collapse-inner rounded">
-        <h6 class="collapse-header">Gestion :</h6>
-        <a class="collapse-item" href="buttons.html">Voir</a>
-        <a class="collapse-item" href="/admin/ajout_utilisateurs">Ajout</a>
-      </div>
-    </div>
+    <a class="nav-link" href="/admin/users">
+      <i class="fas fa-user"></i>
+      <span>Utilisateurs</span></a>
   </li>
-
-  <!-- Nav Item - Utilities Collapse Menu -->
   <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-        <i class="fas fa-desktop"></i>
-          <span>Poste</span>
-    </a>
-    <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-      <div class="bg-white py-2 collapse-inner rounded">
-        <h6 class="collapse-header">Gestion :</h6>
-        <a class="collapse-item" href="utilities-color.html">Voir</a>
-      </div>
-    </div>
+    <a class="nav-link" href="/admin/users">
+      <i class="fas fa-desktop"></i>
+      <span>Postes</span></a>
   </li>
-
-
-  <!-- Nav Item - Pages Collapse Menu -->
   <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-        <i class="fas fa-clipboard-list"></i>
-          <span>Attributions</span>
-    </a>
-    <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-      <div class="bg-white py-2 collapse-inner rounded">
-        <h6 class="collapse-header">Gestion :</h6>
-        <a class="collapse-item" href="login.html">Voir</a>
-        <a class="collapse-item" href="register.html">Attribuer</a>
-        <a class="collapse-item" href="404.html">Historique</a>
-      </div>
-    </div>
+    <a class="nav-link" href="/admin/users">
+      <i class="fas fa-clipboard-list"></i>
+      <span>Attributions</span></a>
   </li>
 
   <!-- Divider -->
