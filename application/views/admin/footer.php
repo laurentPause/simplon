@@ -65,8 +65,16 @@
   <!-- Page level custom scripts -->
   <script src="<?=base_url();?>asset/template/admin/js/demo/datatables-demo.js"></script>
 
-  <!-- Mon scripts -->
-  <script src="<?=base_url();?>inc/js/script.js"></script>
+  <!-- Mes function -->
+  <script src="<?=base_url();?>inc/js/function.js"></script>
+  <!-- Script si besoin -->
+  <?php
+    if(isset($script)):
+  ?>
+  <script src="<?=$script;?>"></script>
+  <?php
+    endif;
+  ?>
 
 
  

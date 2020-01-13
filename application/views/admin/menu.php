@@ -5,7 +5,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
   <!-- Sidebar - Brand -->
-  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url();?>">
     <div class="sidebar-brand-icon rotate-n-15">
     <i class="fas fa-desktop"></i>
     </div>
@@ -17,7 +17,7 @@
 
   <!-- Nav Item - Dashboard -->
   <li class="nav-item ">
-    <a class="nav-link" href="index.html">
+    <a class="nav-link" href="<?= base_url();?>">
       <i class="fas fa-fw fa-tachometer-alt"></i>
       <span>Dashboard</span></a>
   </li>
@@ -34,7 +34,7 @@
       <span>Postes</span></a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="/admin/users">
+    <a class="nav-link" href="/admin/attributions">
       <i class="fas fa-clipboard-list"></i>
       <span>Attributions</span></a>
   </li>
@@ -107,9 +107,11 @@
  <div class="container-fluid">
 
 <!-- Page Heading -->
+<?php if(isset($title)):?>
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
   <h1 class="h3 mb-0 text-gray-800"><?=$title;?></h1>
 </div>
+<?php endif;?>
 
 <!-- Content Row -->
 <div class="row">

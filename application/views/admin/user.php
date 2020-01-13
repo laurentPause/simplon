@@ -36,8 +36,3 @@
 		</div>
 	</div>
 </div>
-
-<script id="my_script">
-	
-	
-</script>

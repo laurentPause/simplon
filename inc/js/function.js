@@ -53,17 +53,3 @@ function add(form,method,table){
         table.ajax.reload();
       });
 }
-//user
-var table_user = get_datatable('#dataTable_user',"http://simplon.test/admin/list_user",[
-		{"data": "id"},{"data": "nom"},{"data": "prenom"},{"data": "email"}]);
-
-$('#add_user').on('click', function () {
-    add('#user','http://simplon.test/admin/add_user',table_user);
-});
-//poste
-var table_poste = get_datatable('#dataTable_poste',"http://simplon.test/admin/list_poste",[
-		{"data": "id"},{"data": "no_serie"},{"data": "marque"},{"data": "modele"}]);
-
-//----------
-$('form').submit(function(e){ e.preventDefault(); });
-$('#my_script').appendTo($( "body" ));

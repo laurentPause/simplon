@@ -15,27 +15,23 @@ class Admin extends CI_Controller {
 
     }
 
+	/**Pages *********************************************************/
+
 	public function index()
 	{
-		$is_login = $this->verif_login();
-
-		if($is_login){
-			$data = array(
-				'title' => 'Postes',
-				'data' => $this->poste->get_all()
-			);
-			$this->load_views('admin/accueil',$data);
-			
-		}else{
-			$this->load->view('login');
-		}
+		$data = array(
+			'title' => 'Postes',
+			'data' => $this->poste->get_all()
+		);
 		
+		$this->load_views('admin/accueil',$data);	
 	}
 
 	public function users()
 	{
 		$data = array(
-			'title' => 'Ajout Utilisateur'
+			'title' => 'Ajouter un utilisateur',
+			'script' => $this->load_script('user')
 		);
 		$this->load_views('admin/user',$data);
 
@@ -44,25 +40,29 @@ class Admin extends CI_Controller {
 	public function postes()
 	{
 		$data = array(
-			'title' => 'Postes'
+			'title' => 'Postes',
+			'script' => $this->load_script('poste')
 		);
 		$this->load_views('admin/poste',$data);
 
 	}
-
-	private function load_views($view,$data)
+	
+	public function attributions()
 	{
-		$this->load->view('admin/header',$data);
-		$this->load->view('admin/menu');
-		$this->load->view($view);
-		$this->load->view('admin/footer');
+		$data = array(
+			'title' => 'Attributions des postes'
+		);
+		$this->load_views('admin/attri',$data);
+
 	}
+
+	/**Database******************************************************* */
 	
 	public function list_user()
 	{
 		$users = $this->user->get_all();
 		$data['data'] = $users;
-		$this->api_json($data);
+		$this->out_json($data);
 	}
 
 	public function add_user()
@@ -81,10 +81,20 @@ class Admin extends CI_Controller {
 	{
 		$postes = $this->poste->get_all();
 		$data['data'] = $postes;
-		$this->api_json($data);
+		$this->out_json($data);
 	}
 
-	private function api_json($data)
+	/**function *********************************************************/
+
+	private function load_views($view,$data)
+	{
+		$this->load->view('admin/header',$data);
+		$this->load->view('admin/menu');
+		$this->load->view($view);
+		$this->load->view('admin/footer');
+	}
+
+	private function out_json($data)
 	{
 		$this->output
                         ->set_status_header(200)
@@ -92,9 +102,9 @@ class Admin extends CI_Controller {
                         ->set_output(json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
 	}
 
-	private function  verif_login()
+	private function load_script($script)
 	{
-		return true;
+		return base_url('inc/js/').$script.'.js';
 	}
 
 }
