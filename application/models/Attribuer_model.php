@@ -7,4 +7,13 @@ class Attribuer_model extends CI_Model {
 
         $this->attribuer = 'attribuer';
     }
+
+    public function get_all()
+    {
+        $this->db->select();
+		
+		$query = $this->db->get($this->attribuer);
+		
+		return $query->result();
+    }
 }

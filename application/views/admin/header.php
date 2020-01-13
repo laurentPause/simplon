@@ -22,6 +22,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
   <link href="<?=base_url();?>vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
+  <script> 
+    var baseUrl = '<?= base_url();?>';
+  </script>
+
 
 </head>
 

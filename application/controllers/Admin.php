@@ -9,6 +9,7 @@ class Admin extends CI_Controller {
 
 		$this->load->model('poste_model', 'poste');
 		$this->load->model('user_model', 'user');
+		$this->load->model('attribuer_model', 'attrib');
 		
 		$this->load->helper('url');
 		$this->load->helper('path');
@@ -50,7 +51,8 @@ class Admin extends CI_Controller {
 	public function attributions()
 	{
 		$data = array(
-			'title' => 'Attributions des postes'
+			'title' => "Attribution d'un poste",
+			'script' => $this->load_script('attribution')
 		);
 		$this->load_views('admin/attri',$data);
 
@@ -82,6 +84,24 @@ class Admin extends CI_Controller {
 		$postes = $this->poste->get_all();
 		$data['data'] = $postes;
 		$this->out_json($data);
+	}
+
+	public function list_attrib()
+	{
+		$attributions = $this->attrib->get_all();
+		$data['data'] = $attributions;
+		$this->out_json($data);
+	}
+
+	public function add_attrib()
+	{
+		$data = [
+            'nom'     => $this->input->post('nom'),
+            'prenom'    => $this->input->post('prenom'),
+            'email'     => $this->input->post('email')
+		];
+		
+		$this->user->add($data);
 	}
 
 	/**function *********************************************************/
