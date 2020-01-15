@@ -13,6 +13,7 @@ class Admin extends CI_Controller {
 		
 		$this->load->helper('url');
 		$this->load->helper('path');
+		$this->load->helper('date');
 
     }
 
@@ -90,8 +91,30 @@ class Admin extends CI_Controller {
 
 	public function list_attrib()
 	{
+		$result = array();
 		$attributions = $this->attrib->get_all();
-		$data['data'] = $attributions;
+		foreach($attributions as $attrib){
+			$user = $this->user->get_by_id($attrib->id_user);
+			$poste = $this->poste->get_by_id($attrib->id_poste);
+			$statut = $this->get_statut_attib(
+				$attrib->jour,
+				$attrib->heure_deb,
+				$attrib->heure_fin
+			);
+
+			$row = array(
+				'user' => $user->nom.' '.$user->prenom,
+				'poste' => $poste->lib,
+				'day' => $attrib->jour,
+				'creneau' => 'De '.$attrib->heure_deb.' à '.$attrib->heure_fin,
+				'statut' => $statut,
+				'action' => $this->btn_retirer()
+			);
+			array_push($result,$row);
+		}
+		
+		$data['data'] = $result;
+		
 		$this->out_json($data);
 	}
 
@@ -129,6 +152,46 @@ class Admin extends CI_Controller {
 	private function load_script($script)
 	{
 		return base_url('inc/js/').$script.'.js';
+	}
+
+	private function get_statut_attib($jour,$heure_deb,$heure_fin)
+	{
+		$present = gmt_to_local(time(),'UP4');
+		$time_deb_attrib = strtotime($jour.' '.$heure_deb);
+		$time_fin_attrib = strtotime($jour.' '.$heure_fin);
+		if($present < $time_deb_attrib){
+			$result = $this->statut(2);
+		}elseif($present > $time_fin_attrib){
+			$result = $this->statut(0);
+		}else{
+			$result = $this->statut(1);
+		}
+		return  $result;
+	}
+
+	private function btn_retirer()
+	{
+		return '<button class="btn btn-danger btn-circle btn-sm">
+					<i class="fas fa-trash"></i>
+	  			</button>';
+	}
+
+	private function statut($stat)
+	{
+		switch ($stat) {
+			case 0:
+				$result = '<span class=" btn btn-danger ">Fini</span>';
+
+				break;
+			case 1:
+				$result = '<span class=" btn btn-success ">En cours</span>';
+				break;
+			
+			default:
+				$result = '<span class=" btn btn-primary ">A venir</span>';
+				break;
+		}
+		return $result;
 	}
 
 }

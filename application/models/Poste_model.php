@@ -17,4 +17,10 @@ class Poste_model extends CI_Model {
 		
 		return $query->result();
     }
+
+    public function get_by_id($id)
+    {
+        $query = $this->db->get_where($this->poste, array('id' => $id));
+        return $query->row();
+    }
 }

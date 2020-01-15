@@ -1,4 +1,4 @@
-function get_datatable(id,method,columns){
+function get_datatable(id,method,columns,callback){
     table = $(id).DataTable({
         "ajax": method,
         "columns": columns,
@@ -10,46 +10,30 @@ function get_datatable(id,method,columns){
         }],
         "dom": 'Brtip',
         "bFilter": true,
-        "buttons": [{
-            "extend": 'copy',
-            "className": 'btn-sm',
-            "text": '<i class="fa fa-clipboard"></i>',
-            "titleAttr": 'Copier dans le presse-papier'
-          },
-          {
-            "extend": 'csv',
-            "className": 'btn-sm',
-            "text": '<i class="fa fa-file-text-o"></i>',
-            "titleAttr": 'Exporter en CSV'
-          },
-          {
-            "extend": 'pdfHtml5',
-            "className": 'btn-sm',
-            "text": '<i class="fa fa-file-pdf-o"></i>',
-            "titleAttr": 'Exporter en PDF'
-          },
-          {
-            "extend": 'print',
-            "className": 'btn-sm',
-            "text": '<i class="fa fa-print"></i>',
-            "titleAttr": 'Imprimer'
-          },
-        ],
         "responsive": true,
-        "initComplete": function () {
+        "init": callback
           
-        }
       });
       return table;
 }
 
 function add(form,method,table){
     var data = $(form).serializeArray();
-      $.ajax({
-        url: method,
-        method: 'POST',
-        data: data,
-      }).done(function (msg) {
-        table.ajax.reload();
-      });
+    $.ajax({
+      url: method,
+      method: 'POST',
+      data: data,
+    }).done(function (msg) {
+      table.ajax.reload();
+    });
+}
+
+function del(data,method){
+  $.ajax({
+    url: method,
+    method: 'POST',
+    data: data,
+  }).done(function (msg) {
+    table.ajax.reload();
+  });
 }
