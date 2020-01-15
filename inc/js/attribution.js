@@ -21,6 +21,7 @@ $( document ).ajaxComplete(del_attrib);
 
 
 function del_attrib(){
+    $('#dataTable_attrib tbody').off('click','button');
     $('#dataTable_attrib tbody').on('click','button', function () {
         //Get the attrib data in datatable
         var tr = $(this).parents('tr')
@@ -30,7 +31,6 @@ function del_attrib(){
             "user": attrib.id_user,
             "poste": attrib.id_poste
         }
-        console.log(attrib);
         del(data,baseUrl + "admin/del_attrib")
     });    
 }

@@ -64,7 +64,13 @@
 
   <!-- Page level custom scripts -->
   <script src="<?=base_url();?>asset/template/admin/js/demo/datatables-demo.js"></script>
+  
+  <!-- PNotify-->
+  <script src="<?php echo base_url('asset/pnotify/js/pnotify.js'); ?>"></script>
+  <script src="<?php echo base_url('asset/pnotify/js/pnotify.buttons.js'); ?>"></script>
+  <script src="<?php echo base_url('asset/pnotify/js/pnotify.nonblock.js'); ?>"></script>
 
+  
   <!-- Mes function -->
   <script src="<?=base_url();?>inc/js/function.js"></script>
   <!-- Script si besoin -->
@@ -75,6 +81,7 @@
   <?php
     endif;
   ?>
+  
 
 
  

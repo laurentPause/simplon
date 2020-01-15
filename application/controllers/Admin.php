@@ -21,12 +21,7 @@ class Admin extends CI_Controller {
 
 	public function index()
 	{
-		$data = array(
-			'title' => 'Postes',
-			'data' => $this->poste->get_all()
-		);
-		
-		$this->load_views('admin/accueil',$data);	
+		$this->attributions();
 	}
 
 	public function users()
@@ -77,8 +72,15 @@ class Admin extends CI_Controller {
             'prenom'    => $this->input->post('prenom'),
             'email'     => $this->input->post('email')
 		];
+		$msg = array(
+			'title' => 'Réussi',
+			'text' => 'Ajout d\' un utilisateur',
+			'type' => 'success'
+		);	
 		
 		$this->user->add($data);
+
+		$this->out_json($msg);
 
 	}
 
@@ -129,8 +131,33 @@ class Admin extends CI_Controller {
             'heure_deb'     => $this->input->post('heureDeb'),
             'heure_fin'     => $this->input->post('heureFin'),
 		];
+		$exist = $this->verif_if_exist($data['id_user'],$data['id_poste']);
+		$ocuper = $this->verif_if_ocuper($data);
+		if(!$ocuper){
+			$msg = array(
+				'title' => 'Sucess',
+				'type' => 'success'
+			);	
+			if($exist != 0){
+				$this->attrib->update($data);
+				$msg['text'] = 'Mis à jour attribution';
+			}else{
+				$this->attrib->add($data);
+				$msg['text'] = 'Ajout attribution';
+
+			}
+			$this->out_json($ocuper);
+
+		}else{
+			$msg = array(
+				'title' => 'Erreur',
+				'text' => 'Poste déja attribuer sur ce créneau',
+				'type' => 'error'
+			);	
+		}
+		$this->out_json($msg);
 		
-		$this->attrib->add($data);
+			
 	}
 
 	public function del_attrib()
@@ -139,8 +166,13 @@ class Admin extends CI_Controller {
             'id_user'     => $this->input->post('user'),
             'id_poste'    => $this->input->post('poste')
 		];
+		$msg = array(
+			'title' => 'Suppression',
+			'text' => 'Attribution supprimer',
+			'type' => 'success'
+		);	
 		$this->attrib->delete($data);
-		$this->out_json($data);
+		$this->out_json($msg);
 	}
 
 	/**function *********************************************************/
@@ -202,6 +234,47 @@ class Admin extends CI_Controller {
 			default:
 				$result = '<span class=" btn btn-primary ">A venir</span>';
 				break;
+		}
+		return $result;
+	}
+
+	private function verif_if_exist($user,$poste)
+	{
+		$data = array(
+			'id_user' => $user,
+			'id_poste' => $poste
+		);
+		$result = $this->attrib->get_count_by_id($data);
+		return $result;
+	}
+	
+	private function verif_if_ocuper($data)
+	{
+		$result = false;
+		$attributions = $this->attrib->get_all();
+		$day_ajouter = strtotime($data['jour']);
+		$date_debAjouter = strtotime($data['jour'].' '.$data['heure_deb']);
+		$date_finAjouter = strtotime($data['jour'].' '.$data['heure_fin']);
+		foreach($attributions as $attrib){
+			$day_exist = strtotime($attrib->jour);
+			$date_debExist = strtotime($attrib->jour.' '.$attrib->heure_deb);
+			$date_finExist = strtotime($attrib->jour.' '.$attrib->heure_fin);
+			
+			if($data['id_poste'] == $attrib->id_poste && $day_ajouter == $day_exist){
+				if($date_debAjouter >= $date_debExist && $date_debAjouter <= $date_finExist){
+					$result = true;
+					break;
+				}elseif($date_finAjouter >= $date_debExist && $date_finAjouter <= $date_finExist){
+					$result = true;
+					break;
+				}else{
+					$result = false;
+					
+				}
+			}else{
+				$result = false;				
+			}
+			
 		}
 		return $result;
 	}

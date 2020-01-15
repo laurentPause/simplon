@@ -21,7 +21,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <link href="<?=base_url();?>asset/template/admin/css/sb-admin-2.min.css" rel="stylesheet">
 
   <link href="<?=base_url();?>vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-
+  
+  <link href="<?=base_url();?>asset/pnotify/css/pnotify.css" rel="stylesheet">
+  <link href="<?=base_url();?>asset/pnotify/css/pnotify.buttons.css" rel="stylesheet">
+  <link href="<?=base_url();?>asset/pnotify/css/pnotify.nonblock.css" rel="stylesheet">
   <script> 
     var baseUrl = '<?= base_url();?>';
   </script>

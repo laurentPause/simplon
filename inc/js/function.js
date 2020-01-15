@@ -20,8 +20,9 @@ function add(form,method,table){
     $.ajax({
       url: method,
       method: 'POST',
-      data: data,
+      data: data
     }).done(function (msg) {
+      message(msg);
       table.ajax.reload();
     });
 }
@@ -32,6 +33,17 @@ function del(data,method){
     method: 'POST',
     data: data,
   }).done(function (msg) {
+    message(msg);
     table.ajax.reload();
+  });
+}
+
+function message(data){
+  
+  new PNotify({
+    title: data.title,
+    text: data.text,
+    type: data.type,
+    styling: 'bootstrap3'
   });
 }
