@@ -108,7 +108,9 @@ class Admin extends CI_Controller {
 				'day' => $attrib->jour,
 				'creneau' => 'De '.$attrib->heure_deb.' à '.$attrib->heure_fin,
 				'statut' => $statut,
-				'action' => $this->btn_retirer()
+				'action' => $this->btn_retirer(),
+				'id_user' => $attrib->id_user,
+				'id_poste' => $attrib->id_poste
 			);
 			array_push($result,$row);
 		}
@@ -129,6 +131,16 @@ class Admin extends CI_Controller {
 		];
 		
 		$this->attrib->add($data);
+	}
+
+	public function del_attrib()
+	{
+		$data = [
+            'id_user'     => $this->input->post('user'),
+            'id_poste'    => $this->input->post('poste')
+		];
+		$this->attrib->delete($data);
+		$this->out_json($data);
 	}
 
 	/**function *********************************************************/
@@ -171,7 +183,7 @@ class Admin extends CI_Controller {
 
 	private function btn_retirer()
 	{
-		return '<button class="btn btn-danger btn-circle btn-sm">
+		return '<button class="btn btn-danger btn-circle btn-sm" title="Supprimer">
 					<i class="fas fa-trash"></i>
 	  			</button>';
 	}

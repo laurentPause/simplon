@@ -21,4 +21,10 @@ class Attribuer_model extends CI_Model {
     {
         $this->db->insert($this->attribuer, $data);
     }
+
+    public function delete($data)
+    {
+        $this->db->delete($this->attribuer, $data);
+
+    }
 }

@@ -10,9 +10,7 @@ function get_datatable(id,method,columns,callback){
         }],
         "dom": 'Brtip',
         "bFilter": true,
-        "responsive": true,
-        "init": callback
-          
+        "responsive": true   
       });
       return table;
 }
