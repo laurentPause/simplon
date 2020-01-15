@@ -6,6 +6,7 @@
 				<thead>
 					<tr>
 						<th>Id</th>
+						<th>Libellé</th>
 						<th>No serie</th>
 						<th>Marque</th>
 						<th>Modéle</th>

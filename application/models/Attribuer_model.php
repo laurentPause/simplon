@@ -16,4 +16,9 @@ class Attribuer_model extends CI_Model {
 		
 		return $query->result();
     }
+
+    public function add($data)
+    {
+        $this->db->insert($this->attribuer, $data);
+    }
 }

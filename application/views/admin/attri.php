@@ -1,4 +1,4 @@
-<form class="attrib" id="attrib" >
+<form class="attrib" id="attrib">
 	<div class="form-group row">
 		<div class="col-sm-6 mb-3 mb-sm-0">
 			<div class="input-group mb-3">
@@ -6,10 +6,9 @@
 					<label class="input-group-text" for="user">Utilisateur</label>
 				</div>
 				<select class="custom-select" id="user" name="user">
-					<option selected>Choose...</option>
-					<option value="1">One</option>
-					<option value="2">Two</option>
-					<option value="3">Three</option>
+					<?php foreach($users as $user): ?>
+					<option value="<?= $user->id;?>"><?= $user->nom.' '. $user->prenom;?></option>
+					<?php endforeach; ?>
 				</select>
 			</div>
 
@@ -20,29 +19,30 @@
 					<label class="input-group-text" for="poste">Poste</label>
 				</div>
 				<select class="custom-select" id="poste" name="poste">
-					<option selected>Choose...</option>
-					<option value="1">One</option>
-					<option value="2">Two</option>
-					<option value="3">Three</option>
+					<?php foreach($postes as $poste): ?>
+					<option value="<?= $poste->id;?>"><?= $poste->lib;?></option>
+					<?php endforeach; ?>
 				</select>
 			</div>
-
 		</div>
 	</div>
 	<div class="form-group">
-		<input type="date" class="form-control form-control-user" id="jour" name="jour" placeholder="Jour">
+		<label  for="jour">Date</label>
+		<input type="date" class="form-control" id="jour" name="jour" placeholder="Jour">
 	</div>
 	<div class="form-group row">
 		<div class="col-sm-6 mb-3 mb-sm-0">
-			<input type="time" class="form-control form-control-user" id="heureDeb" name="heureDeb"
+			<label  for="jour">Heure début</label>
+			<input type="time" class="form-control" id="heureDeb" name="heureDeb"
 				placeholder="Heure début">
 		</div>
 		<div class="col-sm-6">
-			<input type="time" class="form-control form-control-user" id="heureFin" name="heureFin"
+			<label  for="jour">Heure fin</label>
+			<input type="time" class="form-control" id="heureFin" name="heureFin"
 				placeholder="Heure fin">
 		</div>
 	</div>
-	<btn class="btn btn-primary btn-user btn-block" id="add_user">
+	<btn class="btn btn-primary btn-user btn-block" id="add_attrib">
 		Attribuer un poste
 	</btn>
 	<hr>
